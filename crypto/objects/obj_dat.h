@@ -10,7 +10,7 @@
  */
 
 /* Serialized OID's */
-static const unsigned char so[7762] = {
+static const unsigned char so[7767] = {
     0x2A,0x86,0x48,0x86,0xF7,0x0D,                 /* [    0] OBJ_rsadsi */
     0x2A,0x86,0x48,0x86,0xF7,0x0D,0x01,            /* [    6] OBJ_pkcs */
     0x2A,0x86,0x48,0x86,0xF7,0x0D,0x02,0x02,       /* [   13] OBJ_md2 */
@@ -1076,9 +1076,10 @@ static const unsigned char so[7762] = {
     0x2A,0x85,0x03,0x07,0x01,0x02,0x01,0x01,0x04,  /* [ 7736] OBJ_id_tc26_gost_3410_2012_256_paramSetD */
     0x2A,0x86,0x48,0x86,0xF7,0x0D,0x02,0x0C,       /* [ 7745] OBJ_hmacWithSHA512_224 */
     0x2A,0x86,0x48,0x86,0xF7,0x0D,0x02,0x0D,       /* [ 7753] OBJ_hmacWithSHA512_256 */
+    0x2B,0x24,0x08,0x03,0x02,                      /* [ 7761] OBJ_x509ExtProcuration */
 };
 
-#define NUM_NID 1195
+#define NUM_NID 1196
 static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"UNDEF", "undefined", NID_undef},
     {"rsadsi", "RSA Data Security, Inc.", NID_rsadsi, 6, &so[0]},
@@ -2275,9 +2276,10 @@ static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"magma-mac", "magma-mac", NID_magma_mac},
     {"hmacWithSHA512-224", "hmacWithSHA512-224", NID_hmacWithSHA512_224, 8, &so[7745]},
     {"hmacWithSHA512-256", "hmacWithSHA512-256", NID_hmacWithSHA512_256, 8, &so[7753]},
+    {"x509ExtProcuration", "Attribute to indicate that the certificate holder may sign in the name of a third person", NID_x509ExtProcuration, 5, &so[7761]},
 };
 
-#define NUM_SN 1186
+#define NUM_SN 1187
 static const unsigned int sn_objs[NUM_SN] = {
      364,    /* "AD_DVCS" */
      419,    /* "AES-128-CBC" */
@@ -3465,15 +3467,17 @@ static const unsigned int sn_objs[NUM_SN] = {
      158,    /* "x509Certificate" */
      160,    /* "x509Crl" */
     1093,    /* "x509ExtAdmission" */
+    1195,    /* "x509ExtProcuration" */
 };
 
-#define NUM_LN 1186
+#define NUM_LN 1187
 static const unsigned int ln_objs[NUM_LN] = {
      363,    /* "AD Time Stamping" */
      405,    /* "ANSI X9.62" */
      368,    /* "Acceptable OCSP Responses" */
      910,    /* "Any Extended Key Usage" */
      664,    /* "Any language" */
+    1195,    /* "Attribute to indicate that the certificate holder may sign in the name of a third person" */
      177,    /* "Authority Information Access" */
      365,    /* "Basic OCSP Response" */
      285,    /* "Biometric Info" */
@@ -4657,7 +4661,7 @@ static const unsigned int ln_objs[NUM_LN] = {
      125,    /* "zlib compression" */
 };
 
-#define NUM_OBJ 1071
+#define NUM_OBJ 1072
 static const unsigned int obj_objs[NUM_OBJ] = {
        0,    /* OBJ_undef                        0 */
      181,    /* OBJ_iso                          1 */
@@ -4931,6 +4935,7 @@ static const unsigned int obj_objs[NUM_OBJ] = {
       70,    /* OBJ_dsaWithSHA1_2                1 3 14 3 2 27 */
      115,    /* OBJ_sha1WithRSA                  1 3 14 3 2 29 */
      117,    /* OBJ_ripemd160                    1 3 36 3 2 1 */
+    1195,    /* OBJ_x509ExtProcuration           1 3 36 8 3 2 */
     1093,    /* OBJ_x509ExtAdmission             1 3 36 8 3 3 */
      143,    /* OBJ_sxnet                        1 3 101 1 4 1 */
     1171,    /* OBJ_ieee_siswg                   1 3 111 2 1619 */

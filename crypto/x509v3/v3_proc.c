@@ -37,8 +37,8 @@ IMPLEMENT_ASN1_FUNCTIONS(PROCURATION_SYNTAX)
 static int i2r_PROCURATION_SYNTAX(const struct v3_ext_method *method, void *in,
                                 BIO *bp, int ind);
 
-const X509V3_EXT_METHOD v3_ext_admission = {
-    NID_x509ExtProcuration,   /* .ext_nid = */ ---> TODO NID
+const X509V3_EXT_METHOD v3_ext_procuration = {
+    NID_x509ExtProcuration,   /* .ext_nid = */
     0,                      /* .ext_flags = */
     ASN1_ITEM_ref(PROCURATION_SYNTAX), /* .it = */
     NULL, NULL, NULL, NULL,
@@ -51,9 +51,11 @@ const X509V3_EXT_METHOD v3_ext_admission = {
     NULL                    /* extension-specific data */
 };
 
+
 static int i2r_PROCURATION_SYNTAX(const struct v3_ext_method *method, void *in,
                                 BIO *bp, int ind)
 {
+    /*
     PROCURATION_SYNTAX * procuration = (PROCURATION_SYNTAX *)in;
     int i, j, k;
 
@@ -74,10 +76,9 @@ static int i2r_PROCURATION_SYNTAX(const struct v3_ext_method *method, void *in,
     }
 
     SIGNING_FOR* signingFor = procuration->signingFor;
-
-    // TODO CHOICE..
-
-
+    */
+    return 1;
+}
 
 const GENERAL_NAMES *ISSUER_SERIAL_get0_issuer(const ISSUER_SERIAL *is)
 {
@@ -166,5 +167,3 @@ void PROCUATION_SYNTAX_set0_signingFor(PROCURATION_SYNTAX *ps, SIGNING_FOR* sf)
     SIGNING_FOR_free(ps->signingFor;
     ps->signingFor = sf;
 }
-
-.... i2r functions ....

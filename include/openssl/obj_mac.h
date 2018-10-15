@@ -59,6 +59,11 @@
 #define NID_x509ExtAdmission            1093
 #define OBJ_x509ExtAdmission            OBJ_identified_organization,36L,8L,3L,3L
 
+#define SN_x509ExtProcuration           "x509ExtProcuration"
+#define LN_x509ExtProcuration           "Attribute to indicate that the certificate holder may sign in the name of a third person"
+#define NID_x509ExtProcuration          1195
+#define OBJ_x509ExtProcuration          OBJ_identified_organization,36L,8L,3L,2L
+
 #define SN_certicom_arc         "certicom-arc"
 #define NID_certicom_arc                677
 #define OBJ_certicom_arc                OBJ_identified_organization,132L
