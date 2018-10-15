@@ -1,3 +1,18 @@
+#include <stdio.h>
+#include "internal/cryptlib.h"
+#include <openssl/conf.h>
+#include <openssl/ossl_typ.h>
+#include <openssl/asn1.h>
+#include <openssl/asn1t.h>
+
+#include <openssl/x509v3.h>
+
+#include <openssl/safestack.h>
+
+#include "v3_proc.h"
+#include "ext_dat.h"
+
+
 ASN1_SEQUENCE(PROCURATION_SYNTAX) = {
 	ASN1_EXP_OPT(PROCURATION_SYNTAX, country, ASN1_PRINTABLESTRING, 1), 
 	ASN1_EXP_OPT(PROCURATION_SYNTAX, typeOfSubstitution, DIRECTORYSTRING, 2),
