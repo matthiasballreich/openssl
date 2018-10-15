@@ -928,6 +928,19 @@ const ASN1_PRINTABLESTRING *PROFESSION_INFO_get0_registrationNumber(
     const PROFESSION_INFO *pi);
 void PROFESSION_INFO_set0_registrationNumber(
     PROFESSION_INFO *pi, ASN1_PRINTABLESTRING *rn);
+    
+/*
+ * Procuration Syntax
+ */
+typedef struct IssuerSerial_st ISSUER_SERIAL;
+typedef struct SigningFor_st SIGNING_FOR;
+typedef struct ProcurationSyntax_st PROCURATION_SYNTAX;
+
+DECLARE_ASN1_FUNCTIONS(ISSUER_SERIAL);
+DECLARE_ASN1_FUNCTIONS(SIGNING_FOR;)
+DECLARE_ASN1_FUNCTIONS(PROCURATION_SYNTAX)
+
+.... get= / set0 ....
 
 # ifdef  __cplusplus
 }
