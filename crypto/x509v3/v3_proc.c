@@ -12,23 +12,22 @@
 #include "v3_proc.h"
 #include "ext_dat.h"
 
+ASN1_SEQUENCE(ISSUER_SERIAL) = {
+	ASN1_SIMPLE(ISSUER_SERIAL, issuer, GENERAL_NAMES),
+	ASN1_SIMPLE(ISSUER_SERIAL, serial, ASN1_INTEGER),
+	ASN1_OPT(ISSUER_SERIAL, issuerUID, ASN1_BIT_STRING),
+} ASN1_SEQUENCE_END(ISSUER_SERIAL)
+
+ASN1_CHOICE(SIGNING_FOR) = {
+	ASN1_SIMPLE(SIGNING_FOR, d.thirdPerson, GENERAL_NAME),
+	ASN1_SIMPLE(SIGNING_FOR, d.certRef, ISSUER_SERIAL),
+} ASN1_CHOICE_END(SIGNING_FOR)
 
 ASN1_SEQUENCE(PROCURATION_SYNTAX) = {
 	ASN1_EXP_OPT(PROCURATION_SYNTAX, country, ASN1_PRINTABLESTRING, 1), 
 	ASN1_EXP_OPT(PROCURATION_SYNTAX, typeOfSubstitution, DIRECTORYSTRING, 2),
 	ASN1_EXP(PROCURATION_SYNTAX, signingFor, SIGNING_FOR, 3),
-} ASN1_SEQUENC_END(PROCURATION_SYNTAX)
-
-ASN1_CHOICE(SIGNING_FOR) = {
-	ASN1_SIMPLE(SIGNING_FOR, thirdPerson, GENERAL_NAME),
-	ASN1_SIMPLE(SIGNING_FOR, certRef, ISSUER_SERIAL),
-} ASN1_CHOICE_END (SIGNING_FOR)
-
-ASN1_SEQUENCE(ISSUER_SERIAL) = {
-	ASN1_SIMPLE(ISSUER_SERIAL, issuer, GENERAL_NAMES),
-	ASN1_SIMPLE(ISSUER_SERIAL, serial, ASN1_INTEGER),
-	ASN1_OPT(ISSUER_SERIAL, issuerUID, ASN1_BIT_STRING),
-} ASN1_SEQUENC_END(ISSUER_SERIAL)
+} ASN1_SEQUENCE_END(PROCURATION_SYNTAX)
 
 IMPLEMENT_ASN1_FUNCTIONS(SIGNING_FOR)
 IMPLEMENT_ASN1_FUNCTIONS(ISSUER_SERIAL)
@@ -85,7 +84,7 @@ const GENERAL_NAMES *ISSUER_SERIAL_get0_issuer(const ISSUER_SERIAL *is)
     return is->issuer;
 }
 
-void ISSUER_SERIAL_set0_issuer(ISSUER_SERIAL *is, GENERAL_NAMES* i) 
+void ISSUER_SERIAL_set0_issuer(ISSUER_SERIAL *is, GENERAL_NAMES *i) 
 {
     GENERAL_NAMES_free(is->issuer);
     is->issuer = i;
@@ -96,7 +95,7 @@ const ASN1_INTEGER *ISSUER_SERIAL_get0_serial(const ISSUER_SERIAL *is)
     return is->serial;
 }
 
-void ISSUER_SERIAL_set0_serial(ISSUER_SERIAL *is, ASN1_INTEGER* s)
+void ISSUER_SERIAL_set0_serial(ISSUER_SERIAL *is, ASN1_INTEGER *s)
 {
     ASN1_INTEGER_free(is->serial);
     is->serial = s;
@@ -107,7 +106,7 @@ const ASN1_BIT_STRING *ISSUER_SERIAL_get0_issuerUID(const ISSUER_SERIAL *is)
     return is->issuerUID;
 }
 
-void ISSUER_SERIAL_set0_issuerUID(ISSUER_SERIAL *is, ASN1_BIT_STRING* iuid)
+void ISSUER_SERIAL_set0_issuerUID(ISSUER_SERIAL *is, ASN1_BIT_STRING *iuid)
 {
     ASN1_BIT_STRING_free(is->issuerUID);
     is->issuerUID = iuid;
@@ -115,24 +114,34 @@ void ISSUER_SERIAL_set0_issuerUID(ISSUER_SERIAL *is, ASN1_BIT_STRING* iuid)
 
 const GENERAL_NAME *SIGNING_FOR_get0_thirdPerson(const SIGNING_FOR *sf)
 {
-    return sf->thirdPerson;
-}
+    return sf->d.thirdPerson;
+} 
 
-void SIGNING_FOR_set0_thirdPerson(SIGNING_FOR *sf, GENERAL_NAME* tp)
+void SIGNING_FOR_set0_thirdPerson(SIGNING_FOR *sf, GENERAL_NAME *tp) //int type, void *value)
 {
-    GENERAL_NAME_free(sf->thirdPerson);
-    sf->thirdPerson = tp;
+    GENERAL_NAME_free(sf->d.thirdPerson);
+    sf->d.thirdPerson = tp;
 }
+/*
+switch (type) {
+    case GEN_EDIPARTY:
+        sf->d.thirdPerson = value;
+        break;
+    case GEN_EDIPARTY:
+        sf->d.thirdPerson = value;
+        break;
+    }
+*/
 
 const ISSUER_SERIAL *SIGNING_FOR_get0_certRef(const SIGNING_FOR *sf) 
 {
-    return sf->certRef;
+    return sf->d.certRef;
 }
 
-void SIGNING_FOR_set0_certRef(SIGNING_FOR *sf, ISSUER_SERIAL* cr)
+void SIGNING_FOR_set0_certRef(SIGNING_FOR *sf, ISSUER_SERIAL *cr)
 {
-    ISSUER_SERIAL_free(sf->certRef);
-    sf->certRef = cr;
+    ISSUER_SERIAL_free(sf->d.certRef);
+    sf->d.certRef = cr;
 }
 
 const ASN1_PRINTABLESTRING *PROCURATION_SYNTAX_get0_country(const PROCURATION_SYNTAX *ps)
@@ -140,7 +149,7 @@ const ASN1_PRINTABLESTRING *PROCURATION_SYNTAX_get0_country(const PROCURATION_SY
     return ps->country;
 }
 
-void PROCUATION_SYNTAX_set0_certRef(PROCURATION_SYNTAX *ps, ASN1_PRINTABLESTRING* c)
+void PROCUATION_SYNTAX_set0_certRef(PROCURATION_SYNTAX *ps, ASN1_PRINTABLESTRING *c)
 {
     ASN1_PRINTABLESTRING_free(ps->country);
     ps->country = c;
@@ -148,10 +157,10 @@ void PROCUATION_SYNTAX_set0_certRef(PROCURATION_SYNTAX *ps, ASN1_PRINTABLESTRING
 
 const ASN1_STRING *PROCURATION_SYNTAX_get0_typeOfSubstitution(const PROCURATION_SYNTAX *ps)
 {
-    return ps->typeofSubstitution;
+    return ps->typeOfSubstitution;
 }
 
-void PROCUATION_SYNTAX_set0_typeOfSubstitution(PROCURATION_SYNTAX *ps, ASN1_STRING* tos)
+void PROCUATION_SYNTAX_set0_typeOfSubstitution(PROCURATION_SYNTAX *ps, ASN1_STRING *tos)
 {
     ASN1_IA5STRING_free(ps->typeOfSubstitution);
     ps->typeOfSubstitution = tos;
@@ -162,8 +171,8 @@ const SIGNING_FOR *PROCURATION_SYNTAX_get0_signingFor(const PROCURATION_SYNTAX *
     return ps->signingFor;
 }
 
-void PROCUATION_SYNTAX_set0_signingFor(PROCURATION_SYNTAX *ps, SIGNING_FOR* sf)
+void PROCUATION_SYNTAX_set0_signingFor(PROCURATION_SYNTAX *ps, SIGNING_FOR *sf)
 {
-    SIGNING_FOR_free(ps->signingFor;
+    SIGNING_FOR_free(ps->signingFor);
     ps->signingFor = sf;
 }
