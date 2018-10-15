@@ -1,3 +1,6 @@
+#ifndef HEADER_V3_PROCURATION_H
+# define HEADER_V3_PROCURATION_H
+
 struct ProcurationSyntax_st {
 	ASN1_PRINTABLESTRING* country,
 	ASN1_STRING* typeOfSubstition,
