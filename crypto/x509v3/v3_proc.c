@@ -117,21 +117,11 @@ const GENERAL_NAME *SIGNING_FOR_get0_thirdPerson(const SIGNING_FOR *sf)
     return sf->d.thirdPerson;
 } 
 
-void SIGNING_FOR_set0_thirdPerson(SIGNING_FOR *sf, GENERAL_NAME *tp) //int type, void *value)
+void SIGNING_FOR_set0_thirdPerson(SIGNING_FOR *sf, GENERAL_NAME *tp) //int type fehlt, aber kp ob rein muss
 {
     GENERAL_NAME_free(sf->d.thirdPerson);
     sf->d.thirdPerson = tp;
 }
-/*
-switch (type) {
-    case GEN_EDIPARTY:
-        sf->d.thirdPerson = value;
-        break;
-    case GEN_EDIPARTY:
-        sf->d.thirdPerson = value;
-        break;
-    }
-*/
 
 const ISSUER_SERIAL *SIGNING_FOR_get0_certRef(const SIGNING_FOR *sf) 
 {
