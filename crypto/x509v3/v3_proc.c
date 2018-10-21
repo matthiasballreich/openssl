@@ -1,3 +1,11 @@
+/*
+ * Copyright 2017-2018 The OpenSSL Project Authors. All Rights Reserved.
+ *
+ * Licensed under the OpenSSL license (the "License").  You may not use
+ * this file except in compliance with the License.  You can obtain a copy
+ * in the file LICENSE in the source distribution or at
+ * https://www.openssl.org/source/license.html
+ */
 #include <stdio.h>
 #include "internal/cryptlib.h"
 #include <openssl/conf.h>
@@ -206,7 +214,7 @@ const ASN1_PRINTABLESTRING PROCURATION_SYNTAX_get0_country(const PROCURATION_SYN
     return ps->country;
 }
 
-void PROCUATION_SYNTAX_set0_country(PROCURATION_SYNTAX *ps, ASN1_PRINTABLESTRING c)
+void PROCURATION_SYNTAX_set0_country(PROCURATION_SYNTAX *ps, ASN1_PRINTABLESTRING c)
 {
     ps->country = c;
 }
@@ -216,7 +224,7 @@ const ASN1_STRING PROCURATION_SYNTAX_get0_typeOfSubstitution(const PROCURATION_S
     return ps->typeOfSubstitution;
 }
 
-void PROCUATION_SYNTAX_set0_typeOfSubstitution(PROCURATION_SYNTAX *ps, ASN1_STRING tos)
+void PROCURATION_SYNTAX_set0_typeOfSubstitution(PROCURATION_SYNTAX *ps, ASN1_STRING tos)
 {
     ps->typeOfSubstitution = tos;
 }
@@ -226,7 +234,7 @@ const SIGNING_FOR *PROCURATION_SYNTAX_get0_signingFor(const PROCURATION_SYNTAX *
     return ps->signingFor;
 }
 
-void PROCUATION_SYNTAX_set0_signingFor(PROCURATION_SYNTAX *ps, SIGNING_FOR *sf)
+void PROCURATION_SYNTAX_set0_signingFor(PROCURATION_SYNTAX *ps, SIGNING_FOR *sf)
 {
     SIGNING_FOR_free(ps->signingFor);
     ps->signingFor = sf;

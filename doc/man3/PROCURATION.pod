@@ -1,0 +1,127 @@
+=pod
+
+=head1 NAME
+
+PROCURATION_SYNTAX,
+PROCURATION_SYNTAX_get0_country,
+PROCURATION_SYNTAX_set0_certRef,
+PROCURATION_SYNTAX_get0_typeOfSubstitution,
+PROCURATION_SYNTAX_set0_typeOfSubstitution,
+PROCURATION_SYNTAX_get0_signingFor,
+PROCURATION_SYNTAX_set0_signingFor,
+SIGNING_FOR
+SIGNING_FOR_get0_thirdPerson,
+SIGNING_FOR_set0_thirdPerson,
+SIGNING_FOR_get0_certRef,
+SIGNING_FOR_set0_certRef,
+ISSUER_SERIAL,
+ISSUER_SERIAL_get0_issuer,
+ISSUER_SERIAL_set0_issuer,
+ISSUER_SERIAL_get0_serial,
+ISSUER_SERIAL_set0_serial,
+ISSUER_SERIAL_get0_issuerUID,
+ISSUER_SERIAL_set0_issuerUID
+- Accessors and settors for PROCURATION_SYNTAX
+
+=head1 SYNOPSIS
+
+typedef struct IssuerSerial_st ISSUER_SERIAL;
+typedef struct SigningFor_st SIGNING_FOR;
+typedef struct ProcurationSyntax_st PROCURATION_SYNTAX;
+
+const GENERAL_NAMES *ISSUER_SERIAL_get0_issuer(const ISSUER_SERIAL *is);
+void ISSUER_SERIAL_set0_issuer(ISSUER_SERIAL *is, GENERAL_NAMES* i);
+const ASN1_INTEGER ISSUER_SERIAL_get0_serial(const ISSUER_SERIAL *is);
+void ISSUER_SERIAL_set0_serial(ISSUER_SERIAL *is, ASN1_INTEGER s);
+const ASN1_BIT_STRING ISSUER_SERIAL_get0_issuerUID(const ISSUER_SERIAL *is);
+void ISSUER_SERIAL_set0_issuerUID(ISSUER_SERIAL *is, ASN1_BIT_STRING iuid);
+const GENERAL_NAME *SIGNING_FOR_get0_thirdPerson(const SIGNING_FOR *sf);
+void SIGNING_FOR_set0_thirdPerson(SIGNING_FOR *sf, GENERAL_NAME* tp);
+const ISSUER_SERIAL *SIGNING_FOR_get0_certRef(const SIGNING_FOR *sf);
+void SIGNING_FOR_set0_certRef(SIGNING_FOR *sf, ISSUER_SERIAL* cr);
+const ASN1_PRINTABLESTRING PROCURATION_SYNTAX_get0_country(const PROCURATION_SYNTAX *ps);
+void PROCURATION_SYNTAX_set0_certRef(PROCURATION_SYNTAX *ps, ASN1_PRINTABLESTRING c);
+const ASN1_STRING PROCURATION_SYNTAX_get0_typeOfSubstitution(const PROCURATION_SYNTAX *ps);
+void PROCURATION_SYNTAX_set0_typeOfSubstitution(PROCURATION_SYNTAX *ps, ASN1_STRING tos);
+const SIGNING_FOR *PROCURATION_SYNTAX_get0_signingFor(const PROCURATION_SYNTAX *ps);
+void PROCURATION_SYNTAX_set0_signingFor(PROCURATION_SYNTAX *ps, SIGNING_FOR* sf);
+
+=head1 DESCRIPTION
+
+The B<PROCURATION_SYNTAX>, B<SIGNING_FOR> and B<ISSUER_SERIAL> types 
+are opaque structures representing the analogous types defined 
+in the Common PKI Specification published
+by L<https://www.t7ev.org>.
+Knowledge of those structures and their semantics is assumed.
+
+The conventional routines to convert between DER and the local format
+are described in L<d2i_X509(3)>.
+The conventional routines to allocate and free the types are defined
+in L<X509_dup(3)>.
+
+The B<PROCURATION_SYNTAX> type has a country name, 
+a type of substitution and a B<SIGNING_FOR> object.
+
+The PROCURATION_SYNTAX_get0_country, 
+PROCURATION_SYNTAX_get0_typeOfSubstitution
+and PROCURATION_SYNTAX_get0_signingFor functions 
+return pointers to those values within the object.
+--> prüfen ob pointers!
+The PROCURATION_SYNTAX_set0_certRef, 
+PROCURATION_SYNTAX_set0_typeOfSubstitution 
+and PROCURATION_SYNTAX_set0_signingFor functions 
+free any existing value and set the pointer to 
+the specified value.
+--> prüfen ob die freen und ob pointer!!
+
+The B<SIGNING_FOR> type is a B<CHOICE> between a third person name
+or a certificate reference, which is an B<ISSUER_SERIAL> object.
+
+The SIGNING_FOR_get0_thirdPerson 
+and SIGNING_FOR_get0_certRef functions 
+return pointers to those values within the object.
+--> prüfen ob pointers!
+The SIGNING_FOR_set0_thirdPerson 
+and SIGNING_FOR_set0_certRef functions 
+free any existing value and set the pointer to 
+the specified value.
+--> prüfen ob die freen und ob pointer!!
+
+The B<ISSUER_SERIAL> type is a B<SEQUENCE> of an issuer,
+serial and optional issuer unique ID.
+
+The ISSUER_SERIAL_get0_issuer,
+ISSUER_SERIAL_get0_serial
+and ISSUER_SERIAL_get0_issuerUID functions 
+return pointers to those values within the object.
+--> prüfen ob pointers!
+The ISSUER_SERIAL_set0_issuer,
+ISSUER_SERIAL_set0_serial,
+and ISSUER_SERIAL_set0_issuerUID functions 
+free any existing value and set the pointer to 
+the specified value.
+--> prüfen ob die freen und ob pointer!!
+
+=head1 RETURN VALUES
+
+Described above.
+-> note anpassen!
+Note that all of the I<get0> functions return a pointer to the internal data
+structure and must not be freed.
+
+=head1 SEE ALSO
+
+L<X509_dup(3)>,
+L<d2i_X509(3)>,
+L<ADMISSIONS>
+
+=head1 COPYRIGHT
+
+Copyright 2017-2018 The OpenSSL Project Authors. All Rights Reserved.
+
+Licensed under the OpenSSL license (the "License").  You may not use
+this file except in compliance with the License.  You can obtain a copy
+in the file LICENSE in the source distribution or at
+L<https://www.openssl.org/source/license.html>.
+
+=cut
